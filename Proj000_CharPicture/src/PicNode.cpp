@@ -6,19 +6,15 @@ using namespace std;
 namespace
 {
     #define MAX(a, b) ((a) >= (b) ? (a) : (b))
-    int total = 0;
+    int totalCount = 0;
 }
 
 PicNode::PicNode():count(1)
 {
-    ++total;
-    cout << "[tatal:" << total << "]" << " Create PicNode" << endl;
 }
 
 PicNode::~PicNode()
 {
-    --total;
-    cout << "[tatal:" << total << "]" << " Delete PicNode" << endl;
 }
 
 OrigPicNode::OrigPicNode(const char * const * initCharArr, int lineNum):data(nullptr), height(lineNum), weith(0), weithArr(new int[lineNum])
@@ -39,11 +35,16 @@ OrigPicNode::OrigPicNode(const char * const * initCharArr, int lineNum):data(nul
         strncpy(data + offset, initCharArr[i], weithArr[i]);
         offset += weithArr[i];
     }
+
+    ++totalCount;
+    cout << "[totalCount:" << totalCount << "]" << " Create OrigPicNode" << endl;
 }
 
 OrigPicNode::~OrigPicNode()
 {
     delete[] data;
+    --totalCount;
+    cout << "[totalCount:" << totalCount << "]" << " Delete OrigPicNode" << endl;
 }
 
 int OrigPicNode::getHeight() const
@@ -68,7 +69,7 @@ void OrigPicNode::printLine(ostream &os, int line) const
     {
         os << temp[i];
     }
-    
+
     for (int j = weithArr[line]; j < weith; j++)
     {
         os << ' ';
@@ -87,7 +88,16 @@ char* OrigPicNode::getLineStartPtr(int line) const
 }
 
 FramePicNode::FramePicNode(const Picture &pic_):pic(pic_)
-{}
+{
+    ++totalCount;
+    cout << "[totalCount:" << totalCount << "]" << " Create FramePicNode" << endl;
+}
+
+FramePicNode::~FramePicNode()
+{
+    --totalCount;
+    cout << "[totalCount:" << totalCount << "]" << " Delete FramePicNode" << endl;
+}
 
 int FramePicNode::getHeight() const
 {

@@ -49,7 +49,7 @@ class FramePicNode : public PicNode
 
 public:
     FramePicNode(const Picture &pic_);
-    virtual ~FramePicNode(){}
+    virtual ~FramePicNode();
 
 protected:    
     virtual int getHeight() const;
