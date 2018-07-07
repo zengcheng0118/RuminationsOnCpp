@@ -25,6 +25,11 @@ int main(int argc, char **argv)
     //////////////////////////////////
     Picture pic6(hJoinPicture(pic3, pic4));
     pic6.display();
+    frame(pic6).display();
+
+    Picture pic7(vJoinPicture(pic5, pic6));
+    pic7.display();
+    frame(pic7).display();
 
     return 0;
 }

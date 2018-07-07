@@ -9,9 +9,10 @@ class Picture
     // friend ostream& operator<<(ostream&, const Picture&);
     friend Picture frame(const Picture&);
     friend Picture hJoinPicture(const Picture&, const Picture&);
-    // friend Picture vJoinPicture(const Picture&, const Picture&);
+    friend Picture vJoinPicture(const Picture&, const Picture&);
     friend class FramePicNode;
     friend class HJoinPicNode;
+    friend class VJoinPicNode;
 public:
     Picture();
     Picture(const char * const *, int);

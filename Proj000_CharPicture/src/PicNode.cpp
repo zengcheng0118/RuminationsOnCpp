@@ -169,3 +169,41 @@ void HJoinPicNode::printLine(ostream & os, int line) const
         printNSpace(os, pic2.weith());
     }
 }
+
+VJoinPicNode::VJoinPicNode(const Picture & pic1_, const Picture & pic2_):pic1(pic1_), pic2(pic2_)
+{
+    ++totalCount;
+    cout << "[totalCount:" << totalCount << "]" << " Create VJoinPicNode" << endl;
+}
+
+VJoinPicNode::~VJoinPicNode()
+{
+    --totalCount;
+    cout << "[totalCount:" << totalCount << "]" << " Delete VJoinPicNode" << endl;
+}
+
+int VJoinPicNode::getHeight() const
+{
+    return pic1.height() + pic2.height();
+}
+
+int VJoinPicNode::getWeith() const
+{
+    return MAX(pic1.weith(), pic2.weith());
+}
+
+void VJoinPicNode::printLine(ostream & os, int line) const
+{
+    if (line < pic1.height())
+    {
+        pic1.printLine(os, line);
+        if (pic1.weith() < getWeith())
+            printNSpace(os, getWeith() - pic1.weith());
+    }
+    else
+    {
+        pic2.printLine(os, line-pic1.height());
+        if (pic2.weith() < getWeith())
+            printNSpace(os, getWeith() - pic2.weith());
+    }
+}

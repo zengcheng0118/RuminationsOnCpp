@@ -75,4 +75,22 @@ private:
     Picture pic1;
     Picture pic2;
 };
+
+class VJoinPicNode : public PicNode
+{
+    friend class Picture;
+
+public:
+    VJoinPicNode(const Picture &pic1_, const Picture &pic2_);
+    virtual ~VJoinPicNode();
+
+protected:    
+    virtual int getHeight() const;
+    virtual int getWeith() const;
+    virtual void printLine(ostream &os, int line) const;
+
+private:
+    Picture pic1;
+    Picture pic2;
+};
 #endif

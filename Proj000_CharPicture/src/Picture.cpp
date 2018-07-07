@@ -83,3 +83,8 @@ Picture hJoinPicture(const Picture & pic1, const Picture & pic2)
 {
     return Picture(new HJoinPicNode(pic1, pic2));
 }
+
+Picture vJoinPicture(const Picture & pic1, const Picture & pic2)
+{
+    return Picture(new VJoinPicNode(pic1, pic2));
+}
