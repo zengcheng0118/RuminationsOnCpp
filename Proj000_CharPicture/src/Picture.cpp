@@ -59,15 +59,12 @@ int Picture::weith() const
     
 }
 
-int Picture::weith(int line) const
+bool Picture::printLine(ostream & os, int line) const
 {
-    return p->getWeith(line);
-    
-}
-
-void Picture::printLine(ostream & os, int line) const
-{
+    if (line >= height())
+        return false;
     p->printLine(os, line);
+    return true;
 }
 
 Picture::Picture(PicNode* p_):p(p_)
@@ -79,5 +76,10 @@ Picture frame(const Picture& pic)
     {
         throw "Enpty Picture Can't add frame\n";
     }
-    return Picture(new FramePicNode(pic.p));
+    return Picture(new FramePicNode(pic));
+}
+
+Picture hJoinPicture(const Picture & pic1, const Picture & pic2)
+{
+    return Picture(new HJoinPicNode(pic1, pic2));
 }

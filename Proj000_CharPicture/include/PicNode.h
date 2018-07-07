@@ -15,7 +15,6 @@ public:
 protected:    
     virtual int getHeight() const = 0;
     virtual int getWeith() const = 0;
-    virtual int getWeith(int line) const = 0;
     virtual void printLine(ostream &os, int line) const = 0;
 
 private:
@@ -32,7 +31,6 @@ public:
 protected:    
     virtual int getHeight() const;
     virtual int getWeith() const;
-    virtual int getWeith(int line) const;
     virtual void printLine(ostream &os, int line) const;
     char* getLineStartPtr(int line) const;
 
@@ -54,10 +52,27 @@ public:
 protected:    
     virtual int getHeight() const;
     virtual int getWeith() const;
-    virtual int getWeith(int line) const;
     virtual void printLine(ostream &os, int line) const;
 
 private:
     Picture pic;
+};
+
+class HJoinPicNode : public PicNode
+{
+    friend class Picture;
+
+public:
+    HJoinPicNode(const Picture &pic1_, const Picture &pic2_);
+    virtual ~HJoinPicNode();
+
+protected:    
+    virtual int getHeight() const;
+    virtual int getWeith() const;
+    virtual void printLine(ostream &os, int line) const;
+
+private:
+    Picture pic1;
+    Picture pic2;
 };
 #endif

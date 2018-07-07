@@ -15,11 +15,16 @@ int main(int argc, char **argv)
     pic3 = pic2;
     pic3.display();
 
+    //////////////////////////////////
     Picture pic4(frame(pic));
     pic4.display();
 
     Picture pic5(frame(pic4));
     pic5.display();
+
+    //////////////////////////////////
+    Picture pic6(hJoinPicture(pic3, pic4));
+    pic6.display();
 
     return 0;
 }
