@@ -31,5 +31,10 @@ int main(int argc, char **argv)
     pic7.display();
     frame(pic7).display();
 
+    //////////////////////////////////
+    deframe(frame(pic7)).display();
+    deframe(pic4).display();
+    pic4.display();
+
     return 0;
 }

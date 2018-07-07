@@ -8,6 +8,7 @@ class Picture
 {
     // friend ostream& operator<<(ostream&, const Picture&);
     friend Picture frame(const Picture&);
+    friend Picture deframe(const Picture&);
     friend Picture hJoinPicture(const Picture&, const Picture&);
     friend Picture vJoinPicture(const Picture&, const Picture&);
     friend class FramePicNode;
@@ -29,6 +30,7 @@ private:
     Picture(PicNode*);
     int weith(int line) const;
     bool printLine(ostream & os, int line) const;
+    Picture deframe() const;
 
 private:
     PicNode* p;

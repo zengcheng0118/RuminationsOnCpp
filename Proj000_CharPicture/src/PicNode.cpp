@@ -91,7 +91,7 @@ char* OrigPicNode::getLineStartPtr(int line) const
     return data + offset;
 }
 
-FramePicNode::FramePicNode(const Picture &pic_):pic(pic_)
+FramePicNode::FramePicNode(const Picture &pic_):pic(pic_), deframeFlag(false)
 {
     ++totalCount;
     cout << "[totalCount:" << totalCount << "]" << " Create FramePicNode" << endl;
@@ -105,16 +105,28 @@ FramePicNode::~FramePicNode()
 
 int FramePicNode::getHeight() const
 {
-    return pic.height() + 2;
+    if (deframeFlag)
+        return pic.height();
+    else
+        return pic.height() + 2;
 }
 
 int FramePicNode::getWeith() const
 {
-    return pic.weith() + 2;
+    if (deframeFlag)
+        return pic.weith();
+    else
+        return pic.weith() + 2;
 }
 
 void FramePicNode::printLine(ostream &os, int line) const
 {
+    if (deframeFlag)
+    {
+        pic.printLine(os, line);
+        return;        
+    }
+
     if (0 == line || (getHeight() -1) == line)
     {
         for (int i = 0; i < getWeith(); i++)

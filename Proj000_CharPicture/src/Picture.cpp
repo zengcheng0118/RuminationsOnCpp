@@ -67,6 +67,14 @@ bool Picture::printLine(ostream & os, int line) const
     return true;
 }
 
+Picture Picture::deframe() const
+{
+    if (!p->hasFrame())
+        return *this;
+    
+    return ((FramePicNode *)p)->pic;
+}
+
 Picture::Picture(PicNode* p_):p(p_)
 {}
 
@@ -77,6 +85,15 @@ Picture frame(const Picture& pic)
         throw "Enpty Picture Can't add frame\n";
     }
     return Picture(new FramePicNode(pic));
+}
+
+Picture deframe(const Picture& pic)
+{
+    if (nullptr == pic.p)
+    {
+        throw "Enpty Picture Can't delete frame\n";
+    }
+    return pic.deframe();
 }
 
 Picture hJoinPicture(const Picture & pic1, const Picture & pic2)

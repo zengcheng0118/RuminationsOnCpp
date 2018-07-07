@@ -16,6 +16,7 @@ protected:
     virtual int getHeight() const = 0;
     virtual int getWeith() const = 0;
     virtual void printLine(ostream &os, int line) const = 0;
+    virtual bool hasFrame() const { return false; }
 
 private:
     int count;
@@ -53,9 +54,11 @@ protected:
     virtual int getHeight() const;
     virtual int getWeith() const;
     virtual void printLine(ostream &os, int line) const;
+    virtual bool hasFrame() const { return true; }
 
 private:
     Picture pic;
+    bool deframeFlag;
 };
 
 class HJoinPicNode : public PicNode
