@@ -56,6 +56,11 @@ int OrigPicNode::getWeith() const
     return weith;
 }
 
+int OrigPicNode::getWeith(int line) const
+{
+    return weithArr[line];
+}
+
 void OrigPicNode::printLine(ostream &os, int line) const
 {
     char *temp = getLineStartPtr(line);
@@ -63,7 +68,11 @@ void OrigPicNode::printLine(ostream &os, int line) const
     {
         os << temp[i];
     }
-    os << std::endl;
+    
+    for (int j = weithArr[line]; j < weith; j++)
+    {
+        os << ' ';
+    }
 }
 
 char* OrigPicNode::getLineStartPtr(int line) const
@@ -75,4 +84,45 @@ char* OrigPicNode::getLineStartPtr(int line) const
     }
 
     return data + offset;
+}
+
+FramePicNode::FramePicNode(const Picture &pic_):pic(pic_)
+{}
+
+int FramePicNode::getHeight() const
+{
+    return pic.height() + 2;
+}
+
+int FramePicNode::getWeith() const
+{
+    return pic.weith() + 2;
+}
+
+int FramePicNode::getWeith(int line) const
+{
+    return pic.weith() + 2;
+}
+
+void FramePicNode::printLine(ostream &os, int line) const
+{
+    if (0 == line || (getHeight() -1) == line)
+    {
+        for (int i = 0; i < getWeith(); i++)
+        {
+            if (0 == i || getWeith()-1 == i)
+            {
+                os << "+";
+            }
+            else
+                os << "-";
+        }
+    }
+    else
+    {
+        os << "|";
+        // pic.p->printLine(os, line); // TODO(zc) 为什么不能这么访问受保护的接口??
+        pic.printLine(os, line-1);
+        os << "|";
+    }
 }

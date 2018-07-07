@@ -35,6 +35,8 @@ Picture& Picture::operator=(const Picture& pic)
     }
 
     p = pic.p;
+
+    return *this;
 }
 
 void Picture::display() const
@@ -42,6 +44,7 @@ void Picture::display() const
     for (int i = 0; i < height(); i++)
     {
         p->printLine(std::cout, i);
+        std::cout << std::endl;
     }
 }
 
@@ -56,14 +59,25 @@ int Picture::weith() const
     
 }
 
-// Picture::Picture(PicNode* p_):p(p_)
-// {}
+int Picture::weith(int line) const
+{
+    return p->getWeith(line);
+    
+}
 
-// Picture& frame(const Picture& pic)
-// {
-//     if (nullptr == pic.p)
-//     {
-//         throw "Enpty Picture Can't add frame\n";
-//     }
-//     return Picture(new FramePicNode(pic.p));
-// }
+void Picture::printLine(ostream & os, int line) const
+{
+    p->printLine(os, line);
+}
+
+Picture::Picture(PicNode* p_):p(p_)
+{}
+
+Picture frame(const Picture& pic)
+{
+    if (nullptr == pic.p)
+    {
+        throw "Enpty Picture Can't add frame\n";
+    }
+    return Picture(new FramePicNode(pic.p));
+}

@@ -1,6 +1,7 @@
 #ifndef PICNODE_H
 #define PICNODE_H
 #include <iostream>
+#include "Picture.h"
 
 using std::ostream;
 
@@ -12,9 +13,10 @@ public:
     virtual ~PicNode();
 
 protected:    
-    virtual void printLine(ostream &os, int line) const = 0;
     virtual int getHeight() const = 0;
     virtual int getWeith() const = 0;
+    virtual int getWeith(int line) const = 0;
+    virtual void printLine(ostream &os, int line) const = 0;
 
 private:
     int count;
@@ -25,11 +27,12 @@ class OrigPicNode : public PicNode
     friend class Picture;    
 public:
     OrigPicNode(const char* const*, int);
-    ~OrigPicNode();
+    virtual ~OrigPicNode();
 
 protected:    
     virtual int getHeight() const;
     virtual int getWeith() const;
+    virtual int getWeith(int line) const;
     virtual void printLine(ostream &os, int line) const;
     char* getLineStartPtr(int line) const;
 
@@ -44,5 +47,17 @@ class FramePicNode : public PicNode
 {
     friend class Picture;
 
+public:
+    FramePicNode(const Picture &pic_);
+    virtual ~FramePicNode(){}
+
+protected:    
+    virtual int getHeight() const;
+    virtual int getWeith() const;
+    virtual int getWeith(int line) const;
+    virtual void printLine(ostream &os, int line) const;
+
+private:
+    Picture pic;
 };
 #endif
