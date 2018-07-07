@@ -11,5 +11,9 @@ int main(int argc, char **argv)
     Picture pic2(pic);
     pic2.display();
 
+    Picture pic3;
+    pic3 = pic2;
+    pic3.display();
+
     return 0;
 }
