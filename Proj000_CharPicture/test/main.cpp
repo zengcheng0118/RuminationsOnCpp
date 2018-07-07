@@ -18,5 +18,8 @@ int main(int argc, char **argv)
     Picture pic4(frame(pic));
     pic4.display();
 
+    Picture pic5(frame(pic4));
+    pic5.display();
+
     return 0;
 }
